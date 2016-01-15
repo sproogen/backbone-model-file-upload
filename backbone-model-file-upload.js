@@ -73,9 +73,9 @@
       if ( options.formData === true
         || options.formData !== false
         && mergedAttrs[ this.fileAttribute ]
-        && mergedAttrs[ this.fileAttribute ] instanceof File
+        && ( mergedAttrs[ this.fileAttribute ] instanceof File
         || mergedAttrs[ this.fileAttribute ] instanceof FileList
-        || mergedAttrs[ this.fileAttribute ] instanceof Blob ) {
+        || mergedAttrs[ this.fileAttribute ] instanceof Blob ) ) {
 
         // Flatten Attributes reapplying File Object
         var formAttrs = _.clone( mergedAttrs ),
