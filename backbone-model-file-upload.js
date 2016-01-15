@@ -8,6 +8,7 @@
 //       Minjung - Alejandro - github.com/Minjung
 //       XemsDoom - Luca Moser - https://github.com/XemsDoom
 //       DanilloCorvalan  - Danillo Corvalan - https://github.com/DanilloCorvalan
+//       sproogen - James Grant - https://github.com/sproogen
 
 (function(root, factory) {
 
@@ -122,22 +123,28 @@
     // _ FlattenObject gist by "penguinboy".  Thank You!
     // https://gist.github.com/penguinboy/762197
     // NOTE for those who use "<1.0.0".  The notation changed to nested brackets
-    _flatten: function flatten( obj ) {
+    // 15/01/2015 NOTE this has been heavily changed
+    _flatten: function flatten( obj, depth ) {
       var output = {};
       for (var i in obj) {
         if (!obj.hasOwnProperty(i)) continue;
         if (typeof obj[i] == 'object') {
-          var flatObject = flatten(obj[i]);
+          var flatObject = flatten(obj[i], depth+1);
           for (var x in flatObject) {
             if (!flatObject.hasOwnProperty(x)) continue;
-            output[i + '[' + x + ']'] = flatObject[x];
+            if(depth == 0)
+              output[i + x] = flatObject[x];
+            else
+              output['[' + i + ']' + x] = flatObject[x];
           }
         } else {
-          output[i] = obj[i];
+          if(depth == 0)
+            output[i] = obj[i];
+          else
+            output['[' + i + ']'] = obj[i];
         }
       }
       return output;
-
     },
 
     // An "Unflatten" tool which is something normally should be on the backend
