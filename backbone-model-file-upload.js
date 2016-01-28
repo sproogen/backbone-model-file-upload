@@ -105,9 +105,11 @@
         var that = this;
         var beforeSend = options.beforeSend;
         options.beforeSend = function(xhr){
-          xhr.upload.addEventListener('progress', that._progressHandler.bind(that), false);
-          if(beforeSend) {
-            return beforeSend.apply(this, arguments);
+          if(xhr.upload){
+            xhr.upload.addEventListener('progress', that._progressHandler.bind(that), false);
+            if(beforeSend) {
+              return beforeSend.apply(this, arguments);
+            }
           }
         }
       }
