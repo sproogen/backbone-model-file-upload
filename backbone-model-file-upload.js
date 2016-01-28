@@ -104,14 +104,15 @@
         // Handle "progress" events
         var that = this;
         var beforeSend = options.beforeSend;
-        options.beforeSend = function(xhr){
-          if(xhr.upload){
-            xhr.upload.addEventListener('progress', that._progressHandler.bind(that), false);
-            if(beforeSend) {
-              return beforeSend.apply(this, arguments);
-            }
-          }
-        }
+        // This has been removed as it overrieds before send used for authorisation.
+        // options.beforeSend = function(xhr){
+        //   if(xhr.upload){
+        //     xhr.upload.addEventListener('progress', that._progressHandler.bind(that), false);
+        //     if(beforeSend) {
+        //       return beforeSend.apply(this, arguments);
+        //     }
+        //   }
+        // }
       }
 
       // Resume back to original state
